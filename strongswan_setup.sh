@@ -18,22 +18,22 @@
 
 sudo apt-get -y install strongswan strongswan-plugin-pkcs11
 sudo sh -c "echo 'manual' >> /etc/init/strongswan.override"
-mv /etc/strongswan.d/charon/pkcs11.conf /etc/strongswan.d/charon/pkcs11.conf.ORIG
+sudo mv /etc/strongswan.d/charon/pkcs11.conf /etc/strongswan.d/charon/pkcs11.conf.ORIG
 echo -e "pkcs11 {
   load = yes
   modules {
     opensc {
-      path = /usr/lib/i386-linux-gnu/opensc-pkcs11.so
+      path = /usr/lib/x86_64-linux-gnu/opensc-pkcs11.so
       }
     }
-  }" > /etc/strongswan.d/charon/pkcs11.conf
-mv /etc/apparmor.d/local/usr.lib.ipsec.charon /etc/apparmor.d/local/usr.lib.ipsec.charon.ORIG
-echo -e "/usr/lib/i386-linux-gnu/opensc-pkcs11.so rm,
+  }" | sudo tee /etc/strongswan.d/charon/pkcs11.conf
+sudo mv /etc/apparmor.d/local/usr.lib.ipsec.charon /etc/apparmor.d/local/usr.lib.ipsec.charon.ORIG
+echo -e "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so rm,
 /etc/opensc/opensc.conf r,
-/run/pcscd/pcscd.comm rw," >> /etc/apparmor.d/local/usr.lib.ipsec.charon
+/run/pcscd/pcscd.comm rw," | sudo tee --append /etc/apparmor.d/local/usr.lib.ipsec.charon
 sudo apparmor_parser -r /etc/apparmor.d/usr.lib.ipsec.charon
-echo ": PIN %smartcard:1 %prompt" >> /etc/ipsec.secrets
-mv /etc/ipsec.conf /etc/ipsec.conf.ORIG
+echo ": PIN %smartcard:1 %prompt" | sudo tee --append /etc/ipsec.secrets
+sudo mv /etc/ipsec.conf /etc/ipsec.conf.ORIG
 echo "conn base
   keyexchange=ikev1
   ike=aes256-sha1-modp1536
@@ -50,7 +50,8 @@ conn max2
   also=base
   auto=add
   right=access2.max.gov
-  rightid=\"C=US, ST=District of Columbia, L=Washington, O=Office of Management and Budget, CN=access1.max.gov" > /etc/ipsec.conf
+  rightid=\"C=US, ST=District of Columbia, L=Washington, O=Office of Management and Budget, CN=access1.max.gov\" | sudo tee /etc/ipsec.conf
+exit 1
 echo "function FindProxyForURL(url, host) {
   if (dnsResolve(\"webproxy.internal.max.gov\") != null) {
     return \"PROXY webproxy.internal.max.gov:8080\";

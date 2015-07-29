@@ -33,6 +33,7 @@ echo -e "/usr/lib/x86_64-linux-gnu/opensc-pkcs11.so rm,
 /run/pcscd/pcscd.comm rw," | sudo tee --append /etc/apparmor.d/local/usr.lib.ipsec.charon
 sudo apparmor_parser -r /etc/apparmor.d/usr.lib.ipsec.charon
 echo ": PIN %smartcard:1 %prompt" | sudo tee --append /etc/ipsec.secrets
+sudo cp vpn_server.ca /etc/ipsec.d/cacerts/.
 sudo mv /etc/ipsec.conf /etc/ipsec.conf.ORIG
 echo "conn base
   keyexchange=ikev1
@@ -50,7 +51,7 @@ conn max2
   also=base
   auto=add
   right=access2.max.gov
-  rightid=\"C=US, ST=District of Columbia, L=Washington, O=Office of Management and Budget, CN=access1.max.gov\" | sudo tee /etc/ipsec.conf
+  rightid=\"C=US, ST=District of Columbia, L=Washington, O=Office of Management and Budget, CN=access1.max.gov\"" | sudo tee /etc/ipsec.conf
 exit 1
 echo "function FindProxyForURL(url, host) {
   if (dnsResolve(\"webproxy.internal.max.gov\") != null) {

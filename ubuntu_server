@@ -1,0 +1,21 @@
+#!/bin/sh
+sudo apt-get update
+sudo apt-get -y upgrade
+sudo apt-get install xinit
+sudo apt-get install rxvt-unicode
+sudo apt-get install awesome
+mkdir -p ~/.config/awesome
+cp -r /usr/share/awesome/themes ~/.config/awesome
+#edit /etc/xdg/awesome/rc.lua --> beautiful.init(awful.util.getdir("config") .. "/themes/default/theme.lua")
+mv ~/.config/awesome/themes/default ~/.config/awesome/themes/default-theme
+ln -s ~/.config/awesome/themes/default-theme ~/.config/awesome/themes/default
+
+sudo apt-get install git-core
+sudo apt-get install zsh
+#see https://gist.github.com/tsabat/1498393
+wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
+chsh -s `which zsh`
+sudo reboot #should be able to just re-log in
+sudo apt-get install firefox
+
+

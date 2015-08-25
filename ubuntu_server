@@ -2,6 +2,7 @@
 sudo apt-get update
 sudo apt-get upgrade
 sudo apt-get dist-upgrade
+sudo apt-get autoremove
 sudo apt-get install xinit
 sudo apt-get install rxvt-unicode-256color
 sudo apt-get install awesome

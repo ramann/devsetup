@@ -7,14 +7,16 @@ sudo apt-get install xinit
 sudo apt-get install rxvt-unicode-256color
 sudo apt-get install awesome
 sudo apt-get install firefox
+
+cp -r ~/devsetup/dot_files/. ~
 mkdir -p ~/.config/awesome
 cp -r /usr/share/awesome/themes ~/.config/awesome
 ln -s ~/.config/awesome/themes/default ~/.config/awesome/themes/my_theme
+update-menus
+sudo dpkg-reconfigure unattended-upgrades
 
 sudo apt-get install zsh
 #see https://gist.github.com/tsabat/1498393
 wget https://github.com/robbyrussell/oh-my-zsh/raw/master/tools/install.sh -O - | zsh
 chsh -s `which zsh`
 echo "log out and then back in"
-
-

@@ -229,7 +229,8 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Standard program
-    awful.key({ modkey, "b"       }, "f", function() awful.util.spawn("/usr/bin/firefox") end),
+    awful.key({ modkey, "b"       }, "f", function() awful.util.spawn("firefox") end),
+    awful.key({ modkey, "b"       }, "m", function() awful.util.spawn("thunderbird") end),
     awful.key({ modkey,           }, "Return", function () awful.util.spawn(terminal) end),
     awful.key({ modkey, "Control" }, "r", awesome.restart),
     awful.key({ modkey, "Shift"   }, "q", awesome.quit),

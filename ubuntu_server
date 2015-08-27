@@ -10,8 +10,8 @@ sudo apt-get install firefox
 
 cp -r ~/devsetup/dot_files/. ~
 mkdir -p ~/.config/awesome
-cp -r /usr/share/awesome/themes ~/.config/awesome
-ln -s ~/.config/awesome/themes/default ~/.config/awesome/themes/my_theme
+git clone https://github.com/mikar/awesome34-themes themes
+ln -s ~/.config/awesome/themes/wmii ~/.config/awesome/themes/my_theme
 update-menus
 sudo dpkg-reconfigure unattended-upgrades
 

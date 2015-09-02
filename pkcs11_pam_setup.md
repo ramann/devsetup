@@ -37,10 +37,15 @@ reference: http://ubuntuforums.org/showthread.php?t=1557180
 7. Configure the pkcs11 pam module
 
     ```zcat /usr/share/doc/libpam-pkcs11/examples/pam_pkcs11.conf.example.gz | sudo tee /etc/pam_pkcs11/pam_pkcs11.conf```
+    
     ```sudo mkdir -p /etc/pam_pkcs11/{,cacerts,crls}```
+    
     ```sudo cp ~/my_cert.pem /etc/pam_pkcs11/cacerts/```
+    
     ```cd /etc/pam_pkcs11/cacerts && sudo pkcs11_make_hash_link```
+    
     ```echo "me@website.example -> userid" | sudo tee /etc/pam_pkcs11/mail_mapping```
+    
     Edit the "module = /usr/lib/opensc-pkcs11.so" line of /etc/pam_pkcs11/pam_pkcs11.conf to point to the right location of the module on your system
 
 8. Configure your PAM modules

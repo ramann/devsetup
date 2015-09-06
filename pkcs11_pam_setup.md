@@ -35,10 +35,10 @@ reference: http://ubuntuforums.org/showthread.php?t=1557180
     ```pkcs15-init -X ~/my_cert.pem -i 01 -a 01 --format pem```
 
 7. Configure the pkcs11 pam module
-
-    ```zcat /usr/share/doc/libpam-pkcs11/examples/pam_pkcs11.conf.example.gz | sudo tee /etc/pam_pkcs11/pam_pkcs11.conf```
     
     ```sudo mkdir -p /etc/pam_pkcs11/{,cacerts,crls}```
+
+    ```zcat /usr/share/doc/libpam-pkcs11/examples/pam_pkcs11.conf.example.gz | sudo tee /etc/pam_pkcs11/pam_pkcs11.conf```
     
     ```sudo cp ~/my_cert.pem /etc/pam_pkcs11/cacerts/```
     

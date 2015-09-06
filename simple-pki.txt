@@ -1,0 +1,33 @@
+# Rip off of http://pki-tutorial.readthedocs.org/en/latest/simple/ for a very basic PKI
+# Used to create a Signing CA and a signed cert
+
+# On the Client card and the Signing CA card
+pkcs15-init -E
+pkcs15-init --create-pkcs15 -p pkcs15+onepin --pin 1234 --puk 4321
+pkcs15-init -G rsa/2048 -i 01 -a 01 -u sign --pin 1234
+
+# create dirs and db
+mkdir -p ca/signing-ca/db crl certs
+chmod 700 ca/signing-ca/private
+cp /dev/null ca/signing-ca/db/signing-ca.db
+cp /dev/null ca/signing-ca/db/signing-ca.db.attr
+echo 01 > ca/signing-ca/db/signing-ca.crt.srl
+echo 01 > ca/signing-ca/db/signing-ca.crl.srl
+
+# with the Signing CA card in the computer
+openssl req -new -config etc/signing-ca.conf -out ca/signing-ca.csr -key slot_1-id_01 -keyform engine -engine pkcs11
+openssl ca -selfsign -config etc/signing-ca.conf -in ca/signing-ca.csr -out ca/signing-ca.crt -keyform engine -engine pkcs11 -keyfile slot_1-id_01 -extensions signing_ca_ext
+
+# with the Client card in the computer
+openssl req -new -config etc/email.conf -out certs/me.csr -key slot_1-id_01 -keyform engine -engine pkcs11
+
+# with the Signing CA card back in the computer, issue the client cert
+openssl req -new -config etc/email.conf -out certs/me.csr -key slot_1-id_01 -keyform engine -engine pkcs11
+
+# also, why not store the CA cert on the CA card
+pkcs15-init -X ca/signing-ca.crt -i 01 -a 01 
+
+# with the Client card in the reader, store the cert on the card
+pkcs15-init -X certs/me.crt -i 01 -a 01
+
+# then, take a look at the pam_pkcs11 setup instructions and use this instead of a self-signed cert

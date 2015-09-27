@@ -22,7 +22,7 @@ openssl ca -selfsign -config etc/signing-ca.conf -in ca/signing-ca.csr -out ca/s
 openssl req -new -config etc/email.conf -out certs/me.csr -key slot_1-id_01 -keyform engine -engine pkcs11
 
 # with the Signing CA card back in the computer, issue the client cert
-openssl req -new -config etc/email.conf -out certs/me.csr -key slot_1-id_01 -keyform engine -engine pkcs11
+openssl ca -config etc/signing-ca.conf -in certs/me.csr -out certs/me.crt -keyfile slot_1-id_01 -keyform engine -engine pkcs11
 
 # also, why not store the CA cert on the CA card
 pkcs15-init -X ca/signing-ca.crt -i 01 -a 01 

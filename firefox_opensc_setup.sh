@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
 date1=$(date)
 sudo apt-get update
-sudo apt-get -y dist-upgrade #order?
-sudo apt-get -y upgrade #order?
-sudo apt-get -y autoremove
 sudo apt-get -y install pcsc-tools opensc libnss3-tools
 
 firefox -CreateProfile default

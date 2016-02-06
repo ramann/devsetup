@@ -8,7 +8,8 @@ wget --no-check-certificate --no-cookies --header "Cookie: oraclelicense=accept-
 sudo cp ~/Downloads/$jdk_tar /usr/local/
 sudo tar xf /usr/local/$jdk_tar -C /usr/local/
 sudo ln -s /usr/local/jdk1.8.0_74 /usr/local/java
-echo "export PATH="/usr/local/java/bin/:${PATH}\" >> ~/.zshrc
+echo 'export PATH="/usr/local/java/bin/:${PATH}"' >> ~/.zshrc
+echo 'export JAVA_HOME="/usr/local/java"' >> ~/.zshrc
 sudo rm /usr/local/$jdk_tar
 
 #intellij
@@ -18,7 +19,7 @@ sudo cp ~/Downloads/$intellij_tar /usr/local/
 sudo tar xf /usr/local/$intellij_tar -C /usr/local/
 sudo ln -s /usr/local/idea-IU-143.1821.5 /usr/local/idea
 sudo ln -s /usr/local/idea/bin/idea.sh /usr/local/idea/bin/intellij
-echo "export PATH=\"/usr/local/idea/bin:$PATH\"" >> ~/.zshrc
+echo 'export PATH="/usr/local/idea/bin:${PATH}"' >> ~/.zshrc
 sudo rm /usr/local/$intellij_tar
 
 #maven
@@ -27,7 +28,9 @@ wget http://archive.apache.org/dist/maven/maven-3/3.3.3/binaries/$maven333_tar -
 sudo cp ~/Downloads/$maven333_tar /usr/local/
 sudo tar xf /usr/local/$maven333_tar -C /usr/local/
 sudo ln -s /usr/local/apache-maven-3.3.3 /usr/local/maven
-echo "export PATH=\"/usr/local/maven/bin:$PATH\"" >> ~/.zshrc
+echo 'export PATH="/usr/local/maven/bin:${PATH}"' >> ~/.zshrc
+echo 'export M2_HOME="/usr/local/maven"' >> ~/.zshrc
+echo 'export M2="${M2_HOME}/bin"' >> ~/.zshrc
 sudo rm /usr/local/$maven333_tar
 
 

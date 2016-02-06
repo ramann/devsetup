@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 date1=$(date)
 sudo apt-get update
 sudo apt-get -y install pcsc-tools opensc libnss3-tools

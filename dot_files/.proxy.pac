@@ -1,5 +1,5 @@
 function FindProxyForURL(url, host) {
-/*  if (dnsResolve("webproxy.internal.max.gov") != null && shExpMatch(host, "*.mil")) {
+/*  if (dnsResolve("webproxy.internal.max.gov") != null ) {
     return "PROXY webproxy.internal.max.gov:8080";
   }*/
 

@@ -13,11 +13,11 @@ echo 'export JAVA_HOME="/usr/local/java"' >> ~/.zshrc
 sudo rm /usr/local/$jdk_tar
 
 #intellij
-intellij_tar=ideaIU-15.0.3.tar.gz
+intellij_tar=ideaIC-15.0.3.tar.gz
 wget https://download.jetbrains.com/idea/$intellij_tar -O ~/Downloads/$intellij_tar
 sudo cp ~/Downloads/$intellij_tar /usr/local/
 sudo tar xf /usr/local/$intellij_tar -C /usr/local/
-sudo ln -s /usr/local/idea-IU-143.1821.5 /usr/local/idea
+sudo ln -s /usr/local/idea-IC-143.1821.5 /usr/local/idea
 sudo ln -s /usr/local/idea/bin/idea.sh /usr/local/idea/bin/intellij
 echo 'export PATH="/usr/local/idea/bin:${PATH}"' >> ~/.zshrc
 sudo rm /usr/local/$intellij_tar

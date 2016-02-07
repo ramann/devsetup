@@ -1,12 +1,4 @@
-#!/bin/sh
-echo 'net.ipv6.conf.all.disable_ipv6 = 1' | sudo tee --append /etc/sysctl.conf
-echo 'net.ipv6.conf.default.disable_ipv6 = 1' | sudo tee --append /etc/sysctl.conf
-echo 'net.ipv6.conf.lo.disable_ipv6 = 1' | sudo tee --append /etc/sysctl.conf
-
-sudo apt-get update
-sudo apt-get upgrade
-sudo apt-get dist-upgrade
-sudo apt-get autoremove
+#!/bin/bash
 sudo apt-get install xinit
 sudo apt-get install xorg
 sudo apt-get install libcairo-gobject2

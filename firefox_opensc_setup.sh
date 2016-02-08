@@ -12,7 +12,7 @@ then
 	exit $result
 fi
 
-firefox -CreateProfile default
+firefox -CreateProfile default || ./firefox_create_profile.sh
 
 # add opensc module to firefox 
 FIREFOX_SEC_DB_DIR=$(find $HOME/.mozilla/firefox -name '*.default')

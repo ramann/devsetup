@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Add one IP to the list of split tunnel
 add_ip ()
@@ -14,11 +14,18 @@ export CISCO_SPLIT_INC=0
 
 # Delete DNS info provided by VPN server to use internet DNS
 # Comment following line to use DNS beyond VPN tunnel
+rm /tmp/vpn-ip4-dns.*
+echo "$INTERNAL_IP4_DNS" > $(mktemp -p /tmp vpn-ip4-dns.XXXXXX)
 unset INTERNAL_IP4_DNS
 
-# List of IPs beyond VPN tunnel
-add_ip 172.24.0.0	
-add_ip 172.25.0.0
+if grep -e "$VPNGATEWAY" <(echo "$(dig +short access1.max.gov)") 
+then
+ 	add_ip 10.11.0.0
+elif grep -e "$VPNGATEWAY" <(echo "$(dig +short access3.max.gov)")
+then
+ 	add_ip 172.24.0.0
+ 	add_ip 172.25.0.0
+fi
 
 # Execute default script
 . /usr/share/vpnc-scripts/vpnc-script

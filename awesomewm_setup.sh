@@ -7,6 +7,7 @@ sudo apt-get install firefox
 sudo dpkg-reconfigure unattended-upgrades
 
 cp -r ~/devsetup/dot_files/. ~
+mkdir -p ~/.config/awesome
 cp /etc/xdg/awesome/rc.lua ~/.config/awesome/.
 patch ~/.config/awesome/rc.lua < ~/devsetup/rc.lua.patch
 
